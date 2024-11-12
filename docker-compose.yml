@@ -40,6 +40,7 @@ services:
     volumes:
       - ./elk_config/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - ./logs:/logs
+      - ./legacy/log.log:/logs/legacy/log.log
     user: root
     command: ["sh", "-c", "chmod go-w /usr/share/filebeat/filebeat.yml && filebeat -e"]
     depends_on:

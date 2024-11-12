@@ -14,7 +14,7 @@ import (
 
 const (
 	enableJSONLogs = true
-	logsMaxDelay   = time.Second
+	logsMaxDelay   = 5 * time.Second
 )
 
 func main() {
@@ -45,6 +45,8 @@ func main() {
 				int(slog.LevelWarn),
 				int(slog.LevelError),
 			})),
-			gofakeit.HackerPhrase())
+			gofakeit.HackerPhrase(),
+			"ip",
+			gofakeit.IPv4Address())
 	}
 }
