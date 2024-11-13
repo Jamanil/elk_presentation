@@ -2,18 +2,18 @@ filebeat.inputs:
   - type: log
     enabled: true
     paths:
-      - /logs/log.log
+      - /logs/backend.log
     tags: ["backend"]
 
   - type: log
     enabled: true
     paths:
-      - /logs/legacy/log.log
-    tags: ["legacyApp"]
+      - /logs/legacy.log
+    tags: ["legacy"]
 
-#output:
-#  logstash:
-#    hosts: ["logstash:5044"]
+output:
+  logstash:
+    hosts: ["logstash:5044"]
 
-output.console:
-  pretty: true
+#output.console:
+#  pretty: true

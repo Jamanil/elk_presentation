@@ -13,14 +13,14 @@ import (
 )
 
 const (
-	enableJSONLogs = true
+	enableJSONLogs = false
 	logsMaxDelay   = 5 * time.Second
 )
 
 func main() {
 	var logger *slog.Logger
 
-	logFile, err := os.OpenFile("logs/log.log", os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
+	logFile, err := os.OpenFile("./logs/backend.log", os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
 	if err != nil {
 		panic(fmt.Errorf("failed to create log file: %w", err))
 	}
