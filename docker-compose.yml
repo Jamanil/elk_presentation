@@ -9,7 +9,7 @@ services:
     ports:
       - "9200:9200"
     volumes:
-      - es_data:/usr/share/elasticsearch/data
+      - ./shared/elastic:/usr/share/elasticsearch/data
 
   kibana:
     image: docker.elastic.co/kibana/kibana:8.15.2
@@ -26,7 +26,7 @@ services:
     image: docker.elastic.co/logstash/logstash:8.15.2
     container_name: logstash
     volumes:
-      - ./elk_config/logstash/pipeline:/usr/share/logstash/pipeline
+      - ./shared/elk_config/logstash/pipeline:/usr/share/logstash/pipeline
     ports:
       - "5044:5044"
     environment:
@@ -38,13 +38,9 @@ services:
     image: docker.elastic.co/beats/filebeat:8.15.2
     container_name: filebeat
     volumes:
-      - ./elk_config/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./shared/elk_config/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - ./logs:/logs
     user: root
     command: ["sh", "-c", "chmod go-w /usr/share/filebeat/filebeat.yml && filebeat -e"]
     depends_on:
       - logstash
-
-volumes:
-  es_data:
-    driver: local
